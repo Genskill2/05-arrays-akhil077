@@ -1,85 +1,70 @@
-#include <stdio.h>
-#include <stdio.h>
-int max(int a[],int n)
-{
-	int max=0;
-	for (int i=0;i<n;i++)
-	{
-		if (a[i]>max)
-			max=a[i];
-		else
-			continue;
-	}
-	return max;
-}
-int min(int a[],int n)
-{
-	int min=a[0];
-	for(int i=0;i<n;i++)
-	{
-		if(a[i]<min)
-			min=a[i];
-		else
-			continue;
-	}
-	return min;
-}
-float average(int a[],int n)
-{
-	int sum=0;
-	float avg=0;
-	for(int i=0;i<n;i++)
-	{
-		sum+=a[i];
-	}
-	avg=sum/n;
-	return avg;
-}
 
-int mode(int a[],int n)
-{
-	int lmax=max(a,n);
-	int lmin=min(a,n);
-	int counts[100],b=-1;
-	for(int i =lmin;i<=lmax;i++)
-		{
-		int cnt=0;
-		for(int j=0;j<n;j++)
-		{
-			if(a[j]==i)
-				cnt++;
-		}
-		counts[++b]=cnt;
-		}
-	int cmax=0,flag=0;
-	for (int i=0;i<=b;i++)
-	{
-		if (counts[i]>cmax)
-		{	cmax=counts[i];
-			flag=i-(0-lmin);
-		}
-		else
-			continue;
-	}
-	return flag;
+#include <stdio.h>
+#include <assert.h>
+
+int max(int a[], int n){
+  
+  int i,x=a[0];
+  for(i=0;i<n;i++)
+  {
+      if(x<a[i])
+       x=a[i];
+  }
+   return x; 
 }
-    int isprime(int i)
-    {
-	int flag=0;
-			for(int j=2;j<i;j++)
-			{
-				if(i%j==0)
-				{
-					flag=1;
-					break;
-				}
-			}
-			if(flag==0)
-			    return 1;
-			else
-			    return 0;
+int min(int a[], int n){
+  int i,x=a[0];
+  for(i=0;i<n;i++)
+  {
+      if(x>a[i])
+       x=a[i];
     }
-int factors(int n,int a[])
-{
-	int count=0;
-    	int i=2;
+   return x;  
+}
+float average(int a[], int n){ 
+   int i ; float sum=0;
+   for(i=0;i<n;i++)
+  {
+    sum+=a[i]; 
+  }
+  sum=sum/n;
+  return sum;
+  }
+int mode(int a[] , int n){
+  int i,j ;
+  int maxcount=0 , maxvalue=0;
+  for(i=0 ; i<n; ++i){
+    int count = 0;
+    for(j=0; j<n ; ++j){
+      if(a[i]==a[j])
+        ++count ;
+    }
+    
+    if(count > maxcount){
+      maxcount = count;
+      maxvalue = a[i];
+    }
+  }
+   return maxvalue;
+ }
+int factors(int n, int a[]){
+  
+  int i, j=0;
+  int x=n;
+  for(i=2;i<=n;i++)
+  {
+    
+    if(n%i==0)
+    {
+      
+      a[j]=i;
+     // printf("%d %d %d\n",j,n,a[j]);
+      n=n/i;
+      
+      i=1;
+      j++;
+      
+    } 
+  }
+  return j;  
+}
